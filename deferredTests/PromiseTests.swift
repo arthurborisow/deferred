@@ -38,17 +38,22 @@ class PromiseTests: XCTestCase {
             }
         }
         
+        let exp = expectationWithDescription("resolve")
+        deferred.always { _ in
+            exp.fulfill()
+        }
+        
         counter = 0
     }
     
-    override func tearDown() {
-        promise = nil
-        
-        super.tearDown()
+    private func wait() {
+        waitForExpectationsWithTimeout(1, handler: {_ in })
     }
     
     func testResolve() {
         deferred.resolve()
+        
+        wait()
         
         XCTAssert(promise.resolved())
         XCTAssert(promise.state == .Resolved)
@@ -58,6 +63,8 @@ class PromiseTests: XCTestCase {
     func testResolveWith() {
         deferred.resolveWith(42)
         
+        wait()
+        
         XCTAssert(promise.resolved())
         XCTAssert(promise.state == .Resolved)
         XCTAssert(counter == 1 + 4 + 42 + 42)
@@ -65,6 +72,8 @@ class PromiseTests: XCTestCase {
     
     func testReject() {
         deferred.reject()
+        
+        wait()
         
         XCTAssert(promise.rejected())
         XCTAssert(promise.state == .Rejected)
@@ -74,6 +83,8 @@ class PromiseTests: XCTestCase {
     func testRejectWith() {
         deferred.rejectWith(4242)
         
+        wait()
+        
         XCTAssert(promise.rejected())
         XCTAssert(promise.state == .Rejected)
         XCTAssert(counter == 2 + 4 + 4242 + 4242)
@@ -81,6 +92,9 @@ class PromiseTests: XCTestCase {
     
     func testRejectAfterResolve() {
         deferred.resolve()
+        
+        wait()
+        
         let c = counter
         deferred.reject()
         
@@ -91,6 +105,9 @@ class PromiseTests: XCTestCase {
     
     func testResolveAfterReject() {
         deferred.reject()
+        
+        wait()
+        
         let c = counter
         deferred.resolve()
         
@@ -101,28 +118,45 @@ class PromiseTests: XCTestCase {
     
     func testAddingCallbacksAfterResolving() {
         deferred.resolve()
+        
+        wait()
+        
         let c = counter
+        let exp = expectationWithDescription("testAddingCallbacksAfterResolving")
         promise.done { _ in
             self.counter = self.counter + 42
         }.fail { _ in
             self.counter = self.counter + 4242
         }.always { _ in
             self.counter = self.counter + 424242
+        }.always { _ in
+            exp.fulfill()
         }
+        
+        wait()
         
         XCTAssert(counter == c + 42 + 424242)
     }
     
     func testAddingCallbacksAfterRejecting() {
         deferred.reject()
+        
+        wait()
+        
         let c = counter
+        
+        let exp = expectationWithDescription("testAddingCallbacksAfterRejecting")
         promise.done { _ in
             self.counter = self.counter + 42
         }.fail { _ in
             self.counter = self.counter + 4242
         }.always { _ in
             self.counter = self.counter + 424242
+        }.always { _ in
+            exp.fulfill()
         }
+        
+        wait()
         
         XCTAssert(counter == c + 4242 + 424242)
     }

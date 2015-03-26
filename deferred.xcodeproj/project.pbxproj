@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E631FBA1ABDCFCD009EEBD8 /* deferred.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E631FB91ABDCFCD009EEBD8 /* deferred.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E631FC01ABDCFCD009EEBD8 /* deferred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E631FB41ABDCFCD009EEBD8 /* deferred.framework */; };
-		8E631FC71ABDCFCD009EEBD8 /* DeferredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FC61ABDCFCD009EEBD8 /* DeferredTests.swift */; };
 		8E631FD11ABDD391009EEBD8 /* PromiseImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FD01ABDD391009EEBD8 /* PromiseImplementation.swift */; };
 		8E631FD71ABDD5DF009EEBD8 /* Deferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FD61ABDD5DF009EEBD8 /* Deferred.swift */; };
 		8E631FD91ABDD5F4009EEBD8 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FD81ABDD5F4009EEBD8 /* State.swift */; };
@@ -37,7 +36,6 @@
 		8E631FB91ABDCFCD009EEBD8 /* deferred.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deferred.h; sourceTree = "<group>"; };
 		8E631FBF1ABDCFCD009EEBD8 /* deferredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = deferredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E631FC51ABDCFCD009EEBD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E631FC61ABDCFCD009EEBD8 /* DeferredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeferredTests.swift; sourceTree = "<group>"; };
 		8E631FD01ABDD391009EEBD8 /* PromiseImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseImplementation.swift; sourceTree = "<group>"; };
 		8E631FD61ABDD5DF009EEBD8 /* Deferred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deferred.swift; sourceTree = "<group>"; };
 		8E631FD81ABDD5F4009EEBD8 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 		8E631FC31ABDCFCD009EEBD8 /* deferredTests */ = {
 			isa = PBXGroup;
 			children = (
-				8E631FC61ABDCFCD009EEBD8 /* DeferredTests.swift */,
 				8E631FE11ABE028C009EEBD8 /* PromiseTests.swift */,
 				8E631FC41ABDCFCD009EEBD8 /* Supporting Files */,
 			);
@@ -241,7 +238,6 @@
 			files = (
 				8E631FDE1ABDF9FC009EEBD8 /* Deferred.swift in Sources */,
 				8E631FE21ABE028C009EEBD8 /* PromiseTests.swift in Sources */,
-				8E631FC71ABDCFCD009EEBD8 /* DeferredTests.swift in Sources */,
 				8E631FDF1ABDFA06009EEBD8 /* PromiseImplementation.swift in Sources */,
 				8E631FE51ABE0FCE009EEBD8 /* Pomise.swift in Sources */,
 				8E631FE01ABDFA0A009EEBD8 /* State.swift in Sources */,

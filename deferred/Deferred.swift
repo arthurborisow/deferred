@@ -11,16 +11,16 @@ import Foundation
 public class Deferred: Promise {
     public private(set) var state: State = .Pending
     private var arg: AnyObject?
+    private let qState = dispatch_queue_create("edu.self.deferred.q.state", DISPATCH_QUEUE_CONCURRENT)
+    private let qCallbacks = dispatch_queue_create("edu.self.deferred.q.callbacks", DISPATCH_QUEUE_CONCURRENT)
     
-    private var callbacks: [State : [Callback]]? = {
-        var dict = [State : [Callback]]()
-        dict[.Rejected] = []
-        dict[.Resolved] = []
-        
-        return dict
-    }()
     
-    public init() {}
+    private var callbacks: [State : [Callback]] = [State : [Callback]]()
+    
+    public init() {
+        callbacks[.Rejected] = []
+        callbacks[.Resolved] = []
+    }
     
     public func promise() -> Promise {
         return PromiseImplementation(deferred: self)
@@ -46,11 +46,15 @@ public class Deferred: Promise {
     
     // MARK: state
     public func rejected() -> Bool {
-        return state == .Rejected
+        var s: State?
+        dispatch_sync(qState) { s = self.state }
+        return s == .Rejected
     }
     
     public func resolved() -> Bool {
-        return state == .Resolved
+        var s: State?
+        dispatch_sync(qState) { s = self.state }
+        return s == .Resolved
     }
     
     // MARK: callbacks
@@ -72,28 +76,35 @@ public class Deferred: Promise {
 
     // MARK: private helpers
     private func addOrRunCallback(callback: Callback, to: State) {
-        switch (state, to) {
-        case (.Pending, _):
-            callbacks![to]?.append(callback)
-        case (.Resolved, .Resolved),
-             (.Rejected, .Rejected):
-            callback(arg)
-        default:
-            break
+        dispatch_async(qState) {
+            switch (self.state, to) {
+            case (.Pending, _):
+                dispatch_barrier_async(self.qCallbacks) {
+                    let _ = self.callbacks[to]?.append(callback)
+                }
+            case (.Resolved, .Resolved),
+                 (.Rejected, .Rejected):
+                callback(self.arg)
+            default:
+                break
+            }
         }
     }
     
     private func setState(state: State, andRunCallbacksWithArg arg: AnyObject?) {
-        switch self.state {
-        case .Pending:
-            self.state = state
-            self.arg = arg
-            for callback in callbacks![state]! {
-                callback(arg)
+        dispatch_barrier_async(qState) {
+            switch self.state {
+            case .Pending:
+                self.state = state
+                self.arg = arg
+                dispatch_async(self.qCallbacks) {
+                    for callback in self.callbacks[state]! {
+                        callback(arg)
+                    }
+                }
+            default:
+                break
             }
-            callbacks = nil
-        default:
-            break
         }
     }
 }
