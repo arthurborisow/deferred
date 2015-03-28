@@ -161,4 +161,19 @@ class PromiseTests: XCTestCase {
         XCTAssert(counter == c + 4242 + 424242)
     }
     
+    func testAddingOnSpecifiedQueue() {
+        var d = Deferred()
+        let q = dispatch_queue_create("edu.self.deferred.q.test", DISPATCH_QUEUE_SERIAL)
+        var c = 0
+        let exp = expectationWithDescription("testAddingOnSpecifiedQueue")
+        deferred.doneOn(q) { _ in
+            c = 10
+            exp.fulfill()
+        }
+        deferred.resolve()
+        
+        wait()
+        
+        XCTAssert(c == 10)
+    }
 }

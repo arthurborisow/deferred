@@ -18,6 +18,8 @@
 		8E631FE21ABE028C009EEBD8 /* PromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FE11ABE028C009EEBD8 /* PromiseTests.swift */; };
 		8E631FE41ABE040E009EEBD8 /* Pomise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FE31ABE040E009EEBD8 /* Pomise.swift */; };
 		8E631FE51ABE0FCE009EEBD8 /* Pomise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FE31ABE040E009EEBD8 /* Pomise.swift */; };
+		8E75BC651AC6F50F007C2D2C /* CallbackInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */; };
+		8E75BC661AC6F733007C2D2C /* CallbackInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 		8E631FD81ABDD5F4009EEBD8 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		8E631FE11ABE028C009EEBD8 /* PromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		8E631FE31ABE040E009EEBD8 /* Pomise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomise.swift; sourceTree = "<group>"; };
+		8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackInvoker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		8E631FB61ABDCFCD009EEBD8 /* deferred */ = {
 			isa = PBXGroup;
 			children = (
+				8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */,
 				8E631FD61ABDD5DF009EEBD8 /* Deferred.swift */,
 				8E631FE31ABE040E009EEBD8 /* Pomise.swift */,
 				8E631FD01ABDD391009EEBD8 /* PromiseImplementation.swift */,
@@ -227,6 +231,7 @@
 			files = (
 				8E631FE41ABE040E009EEBD8 /* Pomise.swift in Sources */,
 				8E631FD71ABDD5DF009EEBD8 /* Deferred.swift in Sources */,
+				8E75BC651AC6F50F007C2D2C /* CallbackInvoker.swift in Sources */,
 				8E631FD11ABDD391009EEBD8 /* PromiseImplementation.swift in Sources */,
 				8E631FD91ABDD5F4009EEBD8 /* State.swift in Sources */,
 			);
@@ -239,6 +244,7 @@
 				8E631FDE1ABDF9FC009EEBD8 /* Deferred.swift in Sources */,
 				8E631FE21ABE028C009EEBD8 /* PromiseTests.swift in Sources */,
 				8E631FDF1ABDFA06009EEBD8 /* PromiseImplementation.swift in Sources */,
+				8E75BC661AC6F733007C2D2C /* CallbackInvoker.swift in Sources */,
 				8E631FE51ABE0FCE009EEBD8 /* Pomise.swift in Sources */,
 				8E631FE01ABDFA0A009EEBD8 /* State.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ public class Deferred: Promise {
     private let qCallbacks = dispatch_queue_create("edu.self.deferred.q.callbacks", DISPATCH_QUEUE_CONCURRENT)
     
     
-    private var callbacks: [State : [Callback]] = [State : [Callback]]()
+    private var callbacks: [State : [CallbackInvoker]] = [State : [CallbackInvoker]]()
     
     public init() {
         callbacks[.Rejected] = []
@@ -62,9 +62,18 @@ public class Deferred: Promise {
         addOrRunCallback(callback, to: .Resolved)
         return self
     }
+    public func doneOn(q: dispatch_queue_t, callback: Callback) -> Promise {
+        addOrRunCallback(callback, to: .Resolved, on: q)
+        return self
+    }
     
     public func fail(callback: Callback) -> Promise {
         addOrRunCallback(callback, to: .Rejected)
+        return self
+    }
+    
+    public func failOn(q: dispatch_queue_t, callback: Callback) -> Promise {
+        addOrRunCallback(callback, to: .Rejected, on: q)
         return self
     }
     
@@ -73,18 +82,24 @@ public class Deferred: Promise {
         addOrRunCallback(callback, to: .Rejected)
         return self
     }
+    
+    public func alwaysOn(q: dispatch_queue_t, callback: Callback) -> Promise {
+        addOrRunCallback(callback, to: .Resolved, on: q)
+        addOrRunCallback(callback, to: .Rejected, on: q)
+        return self
+    }
 
     // MARK: private helpers
-    private func addOrRunCallback(callback: Callback, to: State) {
+    private func addOrRunCallback(callback: Callback, to: State, on queue: dispatch_queue_t = dispatch_get_main_queue()) {
         dispatch_async(qState) {
             switch (self.state, to) {
             case (.Pending, _):
                 dispatch_barrier_async(self.qCallbacks) {
-                    let _ = self.callbacks[to]?.append(callback)
+                    let _ = self.callbacks[to]?.append(CallbackInvoker(callback: callback, q: queue))
                 }
             case (.Resolved, .Resolved),
                  (.Rejected, .Rejected):
-                callback(self.arg)
+                CallbackInvoker(callback: callback, q: queue).invoke(self.arg)
             default:
                 break
             }
@@ -98,8 +113,8 @@ public class Deferred: Promise {
                 self.state = state
                 self.arg = arg
                 dispatch_async(self.qCallbacks) {
-                    for callback in self.callbacks[state]! {
-                        callback(arg)
+                    for callbackInvoker in self.callbacks[state]! {
+                        callbackInvoker.invoke(self.arg)
                     }
                 }
             default:
