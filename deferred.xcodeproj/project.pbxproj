@@ -20,6 +20,10 @@
 		8E631FE51ABE0FCE009EEBD8 /* Pomise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E631FE31ABE040E009EEBD8 /* Pomise.swift */; };
 		8E75BC651AC6F50F007C2D2C /* CallbackInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */; };
 		8E75BC661AC6F733007C2D2C /* CallbackInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */; };
+		8E9813EA1AC6FBCD006003CD /* Deferred+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9813E91AC6FBCD006003CD /* Deferred+Callbacks.swift */; };
+		8E9813EB1AC6FBF1006003CD /* Deferred+Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9813E91AC6FBCD006003CD /* Deferred+Callbacks.swift */; };
+		8E9813ED1AC6FC28006003CD /* Deferred+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9813EC1AC6FC28006003CD /* Deferred+State.swift */; };
+		8E9813EE1AC6FC32006003CD /* Deferred+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9813EC1AC6FC28006003CD /* Deferred+State.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,8 @@
 		8E631FE11ABE028C009EEBD8 /* PromiseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		8E631FE31ABE040E009EEBD8 /* Pomise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pomise.swift; sourceTree = "<group>"; };
 		8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackInvoker.swift; sourceTree = "<group>"; };
+		8E9813E91AC6FBCD006003CD /* Deferred+Callbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deferred+Callbacks.swift"; sourceTree = "<group>"; };
+		8E9813EC1AC6FC28006003CD /* Deferred+State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deferred+State.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				8E75BC641AC6F50F007C2D2C /* CallbackInvoker.swift */,
-				8E631FD61ABDD5DF009EEBD8 /* Deferred.swift */,
+				8E9813EF1AC6FC6C006003CD /* Deferred */,
 				8E631FE31ABE040E009EEBD8 /* Pomise.swift */,
 				8E631FD01ABDD391009EEBD8 /* PromiseImplementation.swift */,
 				8E631FD81ABDD5F4009EEBD8 /* State.swift */,
@@ -120,6 +126,16 @@
 				8E631FC51ABDCFCD009EEBD8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E9813EF1AC6FC6C006003CD /* Deferred */ = {
+			isa = PBXGroup;
+			children = (
+				8E631FD61ABDD5DF009EEBD8 /* Deferred.swift */,
+				8E9813EC1AC6FC28006003CD /* Deferred+State.swift */,
+				8E9813E91AC6FBCD006003CD /* Deferred+Callbacks.swift */,
+			);
+			name = Deferred;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +245,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E9813ED1AC6FC28006003CD /* Deferred+State.swift in Sources */,
 				8E631FE41ABE040E009EEBD8 /* Pomise.swift in Sources */,
 				8E631FD71ABDD5DF009EEBD8 /* Deferred.swift in Sources */,
 				8E75BC651AC6F50F007C2D2C /* CallbackInvoker.swift in Sources */,
+				8E9813EA1AC6FBCD006003CD /* Deferred+Callbacks.swift in Sources */,
 				8E631FD11ABDD391009EEBD8 /* PromiseImplementation.swift in Sources */,
 				8E631FD91ABDD5F4009EEBD8 /* State.swift in Sources */,
 			);
@@ -244,6 +262,8 @@
 				8E631FDE1ABDF9FC009EEBD8 /* Deferred.swift in Sources */,
 				8E631FE21ABE028C009EEBD8 /* PromiseTests.swift in Sources */,
 				8E631FDF1ABDFA06009EEBD8 /* PromiseImplementation.swift in Sources */,
+				8E9813EB1AC6FBF1006003CD /* Deferred+Callbacks.swift in Sources */,
+				8E9813EE1AC6FC32006003CD /* Deferred+State.swift in Sources */,
 				8E75BC661AC6F733007C2D2C /* CallbackInvoker.swift in Sources */,
 				8E631FE51ABE0FCE009EEBD8 /* Pomise.swift in Sources */,
 				8E631FE01ABDFA0A009EEBD8 /* State.swift in Sources */,
